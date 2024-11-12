@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兰州</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+            bottom: 0;
+            text-decoration: none;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #b7c4d8;
+        }
+
+        .shell {
+            width: 1200px;
+            height: 700px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 10px 5px 50px rgba(122, 39, 39, 0.39);
+        }
+
+        .images {
+            width: 500%;
+            height: 100%;
+            display: flex;
+            position: absolute;
+            left: 0;
+            transition: .2s;
+        }
+
+        .img {
+            width: 100%;
+            background-size: cover;
+        }
+
+        .img:nth-child(1) {
+            background-image: url("img/1.gif"); /* 更换为GIF文件 */
+        }
+
+        .img:nth-child(2) {
+            background-image: url("img/2.gif"); /* 更换为GIF文件 */
+        }
+
+        .img:nth-child(3) {
+            background-image: url("img/3.gif"); /* 更换为GIF文件 */
+        }
+
+        .img:nth-child(4) {
+            background-image: url("img/4.gif"); /* 更换为GIF文件 */
+        }
+
+        .img:nth-child(5) {
+            background-image: url("img/5.gif"); /* 更换为GIF文件 */
+        }
+
+        .min {
+            display: flex;
+            justify-content: space-evenly;
+            position: absolute;
+            bottom: 40px;
+            width: 30%;
+            z-index: 999;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .m {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            border: solid rgba(255, 255, 255, 0.5) 5px;
+            background-color: #fff;
+        }
+
+        .button {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .button-left,
+        .button-right {
+            font-size: 50px;
+            background-color: rgba(102, 123, 161, 0.288);
+            padding: 0 20px;
+            cursor: pointer;
+            line-height: 700px;
+            color: #fff;
+        }
+
+        .bg {
+            width: 100vw;
+            height: 100vh;
+            background-image: url(./img/04.gif); /* 更换为GIF文件 */
+            z-index: -9999;
+            position: absolute;
+            filter: blur(12px);
+            opacity: .5;   
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="shell">
+        <ul class="images">
+            <li class="img"></li>
+            <li class="img"></li>
+            <li class="img"></li>
+            <li class="img"></li>
+            <li class="img"></li>
+        </ul>
+        <ul class="min">
+            <li class="m"></li>
+            <li class="m"></li>
+            <li class="m"></li>
+            <li class="m"></li>
+            <li class="m"></li>
+        </ul>
+        <div class="button">
+            <div class="button-left">&lt;</div>
+            <div class="button-right">&gt;</div>
+        </div>
+    </div>
+    <div class="bg"></div>
+</body>
+<script>
+
+let left = document.querySelector(".button-left");  
+let right = document.querySelector(".button-right");  
+let m = document.querySelectorAll(".m");  
+let images = document.querySelector(".images");  
+let index = 0;  
+let time;  
+
+function position() {  
+    images.style.left = (index * -100) + "%";  
+}  
+
+function add() {  
+    if (index >= m.length - 1) {  
+        index = 0;  
+    } else {  
+        index++;  
+    }  
+}  
+
+function desc() {  
+    if (index < 1) {  
+        index = m.length - 1;  
+    } else {  
+        index--;  
+    }  
+}  
+
+function timer() {  
+    time = setInterval(() => {  
+        index++;  
+        desc();  
+        add();  
+        position();  
+    }, 3000);  
+}  
+
+left.addEventListener("click", () => {  
+    desc();  
+    position();  
+    clearInterval(time);  
+    timer();  
+});  
+
+right.addEventListener("click", () => {  
+    add();  
+    position();  
+    clearInterval(time);  
+    timer();  
+});  
+
+for (let i = 0; i < m.length; i++) {  
+    m[i].addEventListener("click", () => {  
+        index = i;  
+        position();  
+        clearInterval(time);  
+        timer();  
+    });  
+}  
+
+// 事件监听器添加修复  
+function init() {  
+    timer();  
+    window.addEventListener("keydown", keydowndunhuang); // 使用 addEventListener  
+}  
+
+function keydowndunhuang(e) {  
+    if (e.keyCode === 67) {  
+        window.location.href = '../敦煌/dunhuang.html'; // 替换为您的HTML文件路径  
+    }  
+}  
+
+// 确保在DOM加载完成后调用  
+document.addEventListener("DOMContentLoaded", function() {  
+    init();  
+});
+
+</script>
+
+</html>
